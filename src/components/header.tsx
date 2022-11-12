@@ -1,28 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
-import { useState } from 'react';
+import {useState} from 'react';
 
-const [isOpen, setIsOpen] = useState(false);
-
-function HamburgerMenu(){
-    return (
-        <div>
-            <button onClick={() => setIsOpen(!isOpen)}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-            </button>
-        </div>
-
-        
-    );
-}
+const logo = require('./logo.svg') as string;
 
 function NavBarItems(){
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <div>
             <ul className="flex space-x-4 text-[#00ADB5] font-sans text-lg">
@@ -58,10 +40,6 @@ function Header(){
 
                 <div className="hidden ml-auto w-full md:flex md:flex-row md:w-auto">
                     <NavBarItems/>
-                </div>
-
-                <div className='md:hidden ml-auto'>
-                    <HamburgerMenu/>
                 </div>
 
             </div>
