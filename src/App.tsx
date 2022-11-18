@@ -1,15 +1,14 @@
 import './index.css'
-import Header from './components/header'
+import NavBar from './components/navBar'
 import React from 'react';
 import Body from './components/body'
-import HamNavBar from './components/hamNav';
 
 function App() {
   return (
-    <>
-      <Header />
+    <div className='bg-[#EEEEEE]'>
+      <NavBar />
       <Body />
-    </>
+    </div>
   );
 }
 
