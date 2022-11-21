@@ -5,7 +5,7 @@ function GetColor(){
     let r,g,b
     
     r = Math.random() % 225
-    console.log(r)
+    console.log("Hello")
     return r
 }
 // This function will get a random panel and assign it a number. Maybe?
