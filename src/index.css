@@ -6,4 +6,7 @@
     .hamburgerItems{
         @apply hover:text-neutral-200 duration-75;
     }
+    body {
+        @apply bg-neutral-200;
+    }
 }

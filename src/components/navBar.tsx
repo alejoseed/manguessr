@@ -1,13 +1,16 @@
 import HamNavBar from "./hamNav";
 import logo from "./logo.svg";
 
+// Every Item should technically be the same. Maybe I should set an interface so that
+// I don't have to repeat code. Try passing the names as props
+
 function NavBarItems() {
   return (
     <div>
       <ul className="flex md:static text-[#3894a3] font-sans text-lg">
         <li>
           <a
-            href="#"
+            href={'/'}
             className="mx-4 hover:text-[#EEEEEE] duration-[30ms]"
             aria-current="page"
           >
@@ -15,17 +18,17 @@ function NavBarItems() {
           </a>
         </li>
         <li>
-          <a href="#" className="mx-4 hover:text-neutral-200 duration-[30ms]">
-            About
+          <a href={'/play'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+            Play
           </a>
         </li>
         <li>
-          <a href="#" className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <a href={'/login'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
             Login
           </a>
         </li>
         <li>
-          <a href="#" className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <a href={'/contact'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
             Contact
           </a>
         </li>
@@ -39,7 +42,7 @@ function NavBar() {
     <>
       <nav className="bg-[#303841] border-gray-200 shadow-lg px-2 sm:px-4 py-2.5 ">
         <div className="flex items-center">
-          <a href="/" className="flex items-center">
+          <a href={'/'} className="flex items-center">
             <img
               src={logo}
               alt="logo"
