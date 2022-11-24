@@ -10,7 +10,6 @@ export interface Root {
   value: string
 }
 
-
 function PrintMessage() {
   const getJoke = async () => {
     const res = await fetch("https://api.chucknorris.io/jokes/random");
