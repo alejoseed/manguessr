@@ -1,6 +1,7 @@
 import { Squash as Hamburger } from 'hamburger-react'
 import React from 'react';
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 // Maybe there is a better way to implement this. But I'll leave it like this
 // At least for now
@@ -15,20 +16,19 @@ function HamNavBar() {
                 right-0 w-auto h-auto pl-[3.5rem] pr-[1.5rem] pb-[1rem]
                  flex flex-col" >
                     <ul className='flex text-[black] flex-col self-end text-xl items-end space-y-8 pt-3 '>
-                        <a href={'/'} className="hover:text-neutral-200 duration-[30ms]">
+                        <Link to={'/'} className="hover:text-neutral-200 duration-[30ms]">
                             Home
-                        </a>
-                        <a href={'/play'} className="hover:text-neutral-200 duration-[30ms]">
+                        </Link>
+                        <Link to={'/play'} className="hover:text-neutral-200 duration-[30ms]">
                             Play
-                        </a>
-                        <a href="/login" className="hover:text-neutral-200 duration-[30ms]">
+                        </Link>
+                        <Link to="/login" className="hover:text-neutral-200 duration-[30ms]">
                             Login
-                        </a>
-                        <a href="/contact" className="hover:text-neutral-200 duration-[30ms]">
+                        </Link>
+                        <Link to="/contact" className="hover:text-neutral-200 duration-[30ms]">
                             Contact
-                        </a>
+                        </Link>
                     </ul>
-
                 </div>
             )}
 

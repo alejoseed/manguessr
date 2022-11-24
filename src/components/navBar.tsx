@@ -1,6 +1,6 @@
 import HamNavBar from "./hamNav";
 import logo from "./logo.svg";
-
+import { Link } from "react-router-dom";
 // Every Item should technically be the same. Maybe I should set an interface so that
 // I don't have to repeat code. Try passing the names as props
 
@@ -9,28 +9,33 @@ function NavBarItems() {
     <div>
       <ul className="flex md:static text-[#3894a3] font-sans text-lg">
         <li>
-          <a
-            href={'/'}
+          <Link
+            to={'/'}
             className="mx-4 hover:text-[#EEEEEE] duration-[30ms]"
             aria-current="page"
           >
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={'/play'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link to={'/play'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
             Play
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={'/login'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link to={'/login'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
             Login
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={'/contact'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link to={'/contact'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
             Contact
-          </a>
+          </Link>
+        </li>
+        <li>
+          <Link to={'/random'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+            Random
+          </Link>
         </li>
       </ul>
     </div>
