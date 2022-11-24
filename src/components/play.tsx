@@ -6,9 +6,13 @@ import {
 } from "react";
 import NavBar from "./navBar";
 
+let showResult = false;
+
 function GetRandomColor() {
+  // Array to store the generated colors
   let color = ["#", "#", "#", "#"];
-  // Get a rnadom number between 41 and 90
+
+  // Loop to generate hex color code
   for (let i = 0; i < color.length; i++) {
     let tmp = Math.floor(Math.random() * 16777215).toString(16);
     color[i] += tmp;
@@ -17,15 +21,17 @@ function GetRandomColor() {
 }
 
 function randomNumber() {
-  let number = [1, 2, 3, 4];
+  // Get a random number and return the index between 1 and 4
   let random = Math.floor(Math.random() * 4);
-  return number[random];
+  return random;
 }
 
-function handleWinner(a: number, b: number, score: number,setScore: any,
+function handleResult(a: number, b: number, score: number,setScore: any,
   highScore: number, setHighScore: any, setAllColors: any, isClicked: any,
   setWinner: any
 ) {
+
+  showResult = true;
 
   if (score > highScore) {
     console.log(score, highScore);
@@ -89,7 +95,7 @@ function PlayGame() {
                 className="h-12 w-12 rounded-md shadow-mdhover:duration-100 hover:-translate-y-3"
                 onClick={() =>
                   setResult(
-                    handleWinner(
+                    handleResult(
                       1,
                       winner,
                       score,
@@ -110,7 +116,7 @@ function PlayGame() {
                 className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3"
                 onClick={() =>
                   setResult(
-                    handleWinner(
+                    handleResult(
                       2,
                       winner,
                       score,
@@ -131,7 +137,7 @@ function PlayGame() {
                 className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3"
                 onClick={() =>
                   setResult(
-                    handleWinner(
+                    handleResult(
                       3,
                       winner,
                       score,
@@ -152,7 +158,7 @@ function PlayGame() {
                 className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3" 
                 onClick={() =>
                   setResult(
-                    handleWinner(
+                    handleResult(
                       4,
                       winner,
                       score,
@@ -170,7 +176,8 @@ function PlayGame() {
                 4
               </button>
             </div>
-            <div>You click the button {result}</div>
+            {showResult && 
+            <div>You click the {result} button</div>}
           </div>
         )}
       </div>
