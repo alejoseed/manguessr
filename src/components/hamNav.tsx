@@ -28,6 +28,9 @@ function HamNavBar() {
                         <Link to="/contact" className="hover:text-neutral-200 duration-[30ms]">
                             Contact
                         </Link>
+                        <Link to="/api" className="hover:text-neutral-200 duration-[30ms]">
+                            Test API
+                        </Link>
                     </ul>
                 </div>
             )}

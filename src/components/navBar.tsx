@@ -10,7 +10,7 @@ function NavBarItems() {
       <ul className="flex md:static text-[#3894a3] font-sans text-lg">
         <li>
           <Link
-            to={'/'}
+            to={"/"}
             className="mx-4 hover:text-[#EEEEEE] duration-[30ms]"
             aria-current="page"
           >
@@ -18,22 +18,34 @@ function NavBarItems() {
           </Link>
         </li>
         <li>
-          <Link to={'/play'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link
+            to={"/play"}
+            className="mx-4 hover:text-neutral-200 duration-[30ms]"
+          >
             Play
           </Link>
         </li>
         <li>
-          <Link to={'/login'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link
+            to={"/login"}
+            className="mx-4 hover:text-neutral-200 duration-[30ms]"
+          >
             Login
           </Link>
         </li>
         <li>
-          <Link to={'/contact'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link
+            to={"/contact"}
+            className="mx-4 hover:text-neutral-200 duration-[30ms]"
+          >
             Contact
           </Link>
         </li>
         <li>
-          <Link to={'/random'} className="mx-4 hover:text-neutral-200 duration-[30ms]">
+          <Link
+            to={"/random"}
+            className="mx-4 hover:text-neutral-200 duration-[30ms]"
+          >
             Random
           </Link>
         </li>
@@ -47,7 +59,7 @@ function NavBar() {
     <>
       <nav className="bg-[#303841] border-gray-200 shadow-lg px-2 sm:px-4 py-2.5 ">
         <div className="flex items-center">
-          <a href={'/'} className="flex items-center">
+          <a href={"/"} className="flex items-center">
             <img
               src={logo}
               alt="logo"

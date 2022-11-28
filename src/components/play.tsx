@@ -34,7 +34,6 @@ function handleResult(a: number, b: number, score: number,setScore: any,
   showResult = true;
 
   if (score > highScore) {
-    console.log(score, highScore);
     setHighScore(score);
   }
   
