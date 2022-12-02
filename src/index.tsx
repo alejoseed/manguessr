@@ -56,9 +56,7 @@ const queryClient = new QueryClient({
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
       <RouterProvider router={router}/>
-    </React.StrictMode>
   </QueryClientProvider>
 
 );

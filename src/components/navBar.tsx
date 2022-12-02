@@ -43,10 +43,10 @@ function NavBarItems() {
         </li>
         <li>
           <Link
-            to={"/random"}
+            to={"/getmanga"}
             className="mx-4 hover:text-neutral-200 duration-[30ms]"
           >
-            Random
+            TestAPI
           </Link>
         </li>
       </ul>

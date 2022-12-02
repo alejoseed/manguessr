@@ -3,10 +3,32 @@ import {
   JSXElementConstructor,
   ReactFragment,
   useState,
+  useEffect,
 } from "react";
 import { useQuery } from "react-query";
+import axios from "axios";
 
-let showResult = false;
+export interface Root {
+  result: string
+  response: string
+  data: Data
+}
+export interface Data {
+  attributes: Attributes
+}
+export interface Attributes {
+  title: Title
+  altTitles: AltTitle[]
+}
+export interface AltTitle {
+  ja?: string
+  "ja-ro"?: string
+}
+export interface Title {
+  en: string
+}
+
+let correctNum : number;
 
 function GetRandomColor() {
   // Array to store the generated colors
@@ -20,41 +42,55 @@ function GetRandomColor() {
   return color;
 }
 
-function randomNumber() {
-  // create random array of numbers
-  let random = [];
+// call the api to get the manga title
+const CallAPI = async (title: string) => {
+  const mangadex =  "https://api.mangadex.org/manga/random?contentRating%5B%5D=safe&contentRating%5B%5D=suggestive"
+  + "&contentRating%5B%5D=erotica&includedTagsMode=AND&excludedTagsMode=OR";
+  const params = new URLSearchParams();
+  params.append('contentRating[]', 'safe');
+  params.append('contentRating[]', 'suggestive');
+  params.append('contentRating[]', 'erotica');
+  params.append('includedTagsMode', 'AND');
+  params.append('excludedTagsMode', 'OR');
+  correctNum = randomNumber();
+  const mangaNames = ["","","",""];
+
   for (let i = 0; i < 4; i++) {
-    random.push(Math.floor(Math.random() * 4));
+    if(i !== correctNum){
+      await axios.get(mangadex, {params})
+        .then((res) => {
+          mangaNames[i] = res.data.data.attributes.title.en;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      mangaNames[correctNum] = title;
+      console.log(mangaNames[correctNum]);
+      continue;
+    }
   }
+  return mangaNames;
+};
+
+function randomNumber() {
+  let random = 0;
+  random = Math.floor(Math.random() * 4) ;
+  console.log(random);
   return random;
 }
 
-/*function handleResult(
-  a: number,
-  b: number,
-  score: number,
-  setScore: any,
-  highScore: number,
-  setHighScore: any,
-  setAllColors: any,
-  setWinner: any
-) {
-  showResult = true;
-
-  if (score > highScore) {
-    setHighScore(score);
+function handleAnswer(answer : number, manga : number) {
+  if (answer === manga) {
+    alert("correct");
+    // reload the page
+    window.location.reload();
   }
-
-  if (a === b) {
-    setScore(score + 1);
-    handleClick(setAllColors, setWinner);
-    return "correct";
-  } else {
-    setScore(0);
-    handleClick(setAllColors, setWinner);
-    return "wrong";
+  else {
+    alert("incorrect");
   }
-}*/
+}
 
 function handleColors(setAllColors: any) {
   let color = GetRandomColor();
@@ -74,27 +110,44 @@ function PlayGame({title} : {title: string}){
     colorThree: "",
     colorFour: "",
   });
-  // get random colors only if allColors is empty
-  if (allColors.colorOne === "") {
+
+  const [manga, setManga] = useState({
+    mangaOne: "",
+    mangaTwo: "",
+    mangaThree: "",
+    mangaFour: "",
+  });
+
+  useEffect(() => {
+    console.log(title);
+    CallAPI(title).then((res) => {
+      setManga({
+        mangaOne: res[0],
+        mangaTwo: res[1],
+        mangaThree: res[2],
+        mangaFour: res[3],
+      });
+    });
+  }, []);
+
+  
+  useEffect(() => {
     handleColors(setAllColors);
-  }
-  // the title of the manga is passed in as a prop, set it to a state
-  const [mangaTitle, setMangaTitle] = useState(title);
+  }, []);
 
   return (
-    <div className="p-2">
-      <div>
+      <div className="">
         <div className="flex flex-row space-x-3 pt-3">
-          <button className="buttonManga" style={{ backgroundColor: allColors.colorOne }}>{title}</button>
-          <button className="buttonManga" style={{ backgroundColor: allColors.colorTwo }}>{randomNumber()}</button>
+          <button className="buttonManga w-full" onClick={() => handleAnswer(correctNum, 0)} style={{ backgroundColor: allColors.colorOne }}>{manga.mangaOne}</button>
+          <button className="buttonManga w-full" onClick={() => handleAnswer(correctNum, 1)} style={{ backgroundColor: allColors.colorTwo }}>{manga.mangaTwo}</button>
         </div>
         <div className="flex flex-row space-x-3 pt-3">
-          <button className="buttonManga" style={{ backgroundColor: allColors.colorThree }}>{randomNumber()}</button>
-          <button className="buttonManga" style={{ backgroundColor: allColors.colorFour }}>{randomNumber()}</button>
+          <button className="buttonManga w-full" onClick={() => handleAnswer(correctNum, 2)} style={{ backgroundColor: allColors.colorThree }}>{manga.mangaThree}</button>
+          <button className="buttonManga w-full" onClick={() => handleAnswer(correctNum, 3)} style={{ backgroundColor: allColors.colorFour }}>{manga.mangaFour}</button>
         </div>
       </div>
-    </div>
   );
 }
+
 
 export default PlayGame;

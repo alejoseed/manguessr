@@ -12,7 +12,7 @@ function HamNavBar() {
         <div className='ml-auto md:hidden'>
             <Hamburger toggled={isOpen} toggle={setIsOpen} />
             {isOpen && (
-                <div className="absolute bg-[#3894a3] rounded mt-2.5 
+                <div className="absolute shadow-lg z-10 bg-[#3894a3] rounded-md mt-2.5 
                 right-0 w-auto h-auto pl-[3.5rem] pr-[1.5rem] pb-[1rem]
                  flex flex-col" >
                     <ul className='flex text-[black] flex-col self-end text-xl items-end space-y-8 pt-3 '>
@@ -28,7 +28,7 @@ function HamNavBar() {
                         <Link to="/contact" className="hover:text-neutral-200 duration-[30ms]">
                             Contact
                         </Link>
-                        <Link to="/api" className="hover:text-neutral-200 duration-[30ms]">
+                        <Link to="/getmanga" className="hover:text-neutral-200 duration-[30ms]">
                             Test API
                         </Link>
                     </ul>
