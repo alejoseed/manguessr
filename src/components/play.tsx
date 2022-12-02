@@ -4,7 +4,7 @@ import {
   ReactFragment,
   useState,
 } from "react";
-import NavBar from "./navBar";
+import { useQuery } from "react-query";
 
 let showResult = false;
 
@@ -21,34 +21,42 @@ function GetRandomColor() {
 }
 
 function randomNumber() {
-  // Get a random number and return the index between 1 and 4
-  let random = Math.floor(Math.random() * 4);
+  // create random array of numbers
+  let random = [];
+  for (let i = 0; i < 4; i++) {
+    random.push(Math.floor(Math.random() * 4));
+  }
   return random;
 }
 
-function handleResult(a: number, b: number, score: number,setScore: any,
-  highScore: number, setHighScore: any, setAllColors: any, isClicked: any,
+/*function handleResult(
+  a: number,
+  b: number,
+  score: number,
+  setScore: any,
+  highScore: number,
+  setHighScore: any,
+  setAllColors: any,
   setWinner: any
 ) {
-
   showResult = true;
 
   if (score > highScore) {
     setHighScore(score);
   }
-  
+
   if (a === b) {
     setScore(score + 1);
-    handleClick(setAllColors, isClicked, setWinner);
+    handleClick(setAllColors, setWinner);
     return "correct";
   } else {
     setScore(0);
-    handleClick(setAllColors, isClicked, setWinner);
+    handleClick(setAllColors, setWinner);
     return "wrong";
   }
-}
+}*/
 
-function handleClick(setAllColors: any, isClicked: any, setWinner: any) {
+function handleColors(setAllColors: any) {
   let color = GetRandomColor();
   setAllColors({
     colorOne: color[0],
@@ -56,129 +64,34 @@ function handleClick(setAllColors: any, isClicked: any, setWinner: any) {
     colorThree: color[2],
     colorFour: color[3],
   });
-  setWinner(randomNumber);
-  isClicked(true);
   return setAllColors;
 }
 
-function PlayGame() {
+function PlayGame({title} : {title: string}){
   const [allColors, setAllColors] = useState({
     colorOne: "",
     colorTwo: "",
     colorThree: "",
     colorFour: "",
   });
-  const [winner, setWinner] = useState(0);
-  const [result, setResult] = useState("");
-  const [clicked, isClicked] = useState(false);
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  // get random colors only if allColors is empty
+  if (allColors.colorOne === "") {
+    handleColors(setAllColors);
+  }
+  // the title of the manga is passed in as a prop, set it to a state
+  const [mangaTitle, setMangaTitle] = useState(title);
 
   return (
-    <div>
-      <NavBar />
-      <div className="flex flex-col justify-center items-center h-screen">
-        This is a fun game
-        <button
-          className="rounded-md bg-blue-400"
-          onClick={() => handleClick(setAllColors, isClicked, setWinner)}
-        >
-          Click to change the color
-        </button>
-        {clicked && (
-          <div>
-            <p>Select a button </p> <p>Score: {score}</p>{" "}
-            <p>Highscore: {highScore}</p>
-            <div className="flex flex-row space-x-3 pt-3">
-              <button
-                className="h-12 w-12 rounded-md shadow-mdhover:duration-100 hover:-translate-y-3"
-                onClick={() =>
-                  setResult(
-                    handleResult(
-                      1,
-                      winner,
-                      score,
-                      setScore,
-                      highScore,
-                      setHighScore,
-                      setAllColors,
-                      isClicked,
-                      setWinner
-                    )
-                  )
-                }
-                style={{ backgroundColor: allColors.colorOne }}
-              >
-                1
-              </button>
-              <button
-                className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3"
-                onClick={() =>
-                  setResult(
-                    handleResult(
-                      2,
-                      winner,
-                      score,
-                      setScore,
-                      highScore,
-                      setHighScore,
-                      setAllColors,
-                      isClicked,
-                      setWinner
-                    )
-                  )
-                }
-                style={{ backgroundColor: allColors.colorTwo }}
-              >
-                2
-              </button>
-              <button
-                className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3"
-                onClick={() =>
-                  setResult(
-                    handleResult(
-                      3,
-                      winner,
-                      score,
-                      setScore,
-                      highScore,
-                      setHighScore,
-                      setAllColors,
-                      isClicked,
-                      setWinner
-                    )
-                  )
-                }
-                style={{ backgroundColor: allColors.colorThree }}
-              >
-                3
-              </button>
-              <button
-                className="h-12 w-12 rounded-md shadow-md hover:duration-100 hover:-translate-y-3" 
-                onClick={() =>
-                  setResult(
-                    handleResult(
-                      4,
-                      winner,
-                      score,
-                      setScore,
-                      highScore,
-                      setHighScore,
-                      setAllColors,
-                      isClicked,
-                      setWinner
-                    )
-                  )
-                }
-                style={{ backgroundColor: allColors.colorFour }}
-              >
-                4
-              </button>
-            </div>
-            {showResult && 
-            <div>You click the {result} button</div>}
-          </div>
-        )}
+    <div className="p-2">
+      <div>
+        <div className="flex flex-row space-x-3 pt-3">
+          <button className="buttonManga" style={{ backgroundColor: allColors.colorOne }}>{title}</button>
+          <button className="buttonManga" style={{ backgroundColor: allColors.colorTwo }}>{randomNumber()}</button>
+        </div>
+        <div className="flex flex-row space-x-3 pt-3">
+          <button className="buttonManga" style={{ backgroundColor: allColors.colorThree }}>{randomNumber()}</button>
+          <button className="buttonManga" style={{ backgroundColor: allColors.colorFour }}>{randomNumber()}</button>
+        </div>
       </div>
     </div>
   );

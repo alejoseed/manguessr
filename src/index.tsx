@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import PrintAMessage from './components/testapi';
 import PrintManga from './components/randomManga';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/play',
-    element: <PlayGame />,
+    element: <PlayGame title={''} />,
     errorElement: <ErrorPage/>
   },
 ]);
